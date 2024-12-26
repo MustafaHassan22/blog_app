@@ -2,7 +2,8 @@ import 'package:blogapp/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
 class CustomGradientButton extends StatelessWidget {
-  const CustomGradientButton({super.key});
+  final String buttonText;
+  const CustomGradientButton({super.key, required this.buttonText});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,9 @@ class CustomGradientButton extends StatelessWidget {
             backgroundColor: AppPallete.transparentColor,
             shadowColor: AppPallete.transparentColor,
           ),
-          child: const Text(
-            'Sing Up',
-            style: TextStyle(
+          child: Text(
+            buttonText,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: Colors.white,
