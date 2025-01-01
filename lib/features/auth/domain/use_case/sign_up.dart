@@ -1,12 +1,12 @@
 import 'package:blogapp/core/error/failure.dart';
 import 'package:blogapp/core/usecases/usecase.dart';
 import 'package:blogapp/features/auth/domain/repository/auth_repo.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 
-class SignUp implements Usecase<String, SignUpParams> {
+class UserSignUp implements Usecase<String, SignUpParams> {
   final AuthRepo authRepo;
 
-  SignUp(this.authRepo);
+  UserSignUp(this.authRepo);
 
   @override
   Future<Either<Failure, String>> call(SignUpParams param) async {
@@ -20,5 +20,9 @@ class SignUpParams {
   final String name;
   final String password;
 
-  SignUpParams(this.email, this.name, this.password);
+  SignUpParams({
+    required this.email,
+    required this.name,
+    required this.password,
+  });
 }
