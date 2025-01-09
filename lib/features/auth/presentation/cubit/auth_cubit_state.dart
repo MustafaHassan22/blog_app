@@ -8,9 +8,9 @@ final class AuthCubitInitial extends AuthCubitState {}
 class AuthLoadingStae extends AuthCubitState {}
 
 class AuthSuccesState extends AuthCubitState {
-  final String userId;
+  final User user;
 
-  AuthSuccesState(this.userId);
+  AuthSuccesState(this.user);
 }
 
 class AuthFailureState extends AuthCubitState {

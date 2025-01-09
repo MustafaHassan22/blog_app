@@ -1,3 +1,4 @@
+import 'package:blogapp/features/auth/domain/entitie/user.dart';
 import 'package:blogapp/features/auth/domain/use_case/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'auth_cubit_state.dart';
 
 class AuthCubitCubit extends Cubit<AuthCubitState> {
-  final UserSignUp _userSignUp;
-  AuthCubitCubit({required UserSignUp userSignUp})
+  final UserSignUpUsecase _userSignUp;
+  AuthCubitCubit({required UserSignUpUsecase userSignUp})
       : _userSignUp = userSignUp,
         super(AuthCubitInitial());
 

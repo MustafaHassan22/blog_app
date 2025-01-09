@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 
 class CustomGradientButton extends StatelessWidget {
   final String buttonText;
-  const CustomGradientButton({super.key, required this.buttonText});
+  final VoidCallback onPressed;
+  const CustomGradientButton({
+    super.key,
+    required this.buttonText,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class CustomGradientButton extends StatelessWidget {
             end: Alignment.topRight,
           )),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             fixedSize: Size(MediaQuery.of(context).size.width, 65),
             backgroundColor: AppPallete.transparentColor,
