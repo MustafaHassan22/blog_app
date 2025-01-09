@@ -2,6 +2,7 @@ import 'package:blogapp/core/secrets/app_secrets.dart';
 import 'package:blogapp/features/auth/data/data_source/auth_remote_datasource.dart';
 import 'package:blogapp/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:blogapp/features/auth/domain/repository/auth_repo.dart';
+import 'package:blogapp/features/auth/domain/use_case/current_user_usecase.dart';
 import 'package:blogapp/features/auth/domain/use_case/login_usecase.dart';
 import 'package:blogapp/features/auth/domain/use_case/sign_up.dart';
 import 'package:blogapp/features/auth/presentation/bloc/auth_bloc_bloc.dart';
@@ -21,21 +22,31 @@ Future<void> initDependencies() async {
 }
 
 void _initAuth() {
-  serviceLocator.registerFactory<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(serviceLocator()),
-  );
-  serviceLocator.registerFactory<AuthRepo>(
-    () => AuthRepositoryImpl(serviceLocator()),
-  );
-
-  serviceLocator.registerFactory(
-    () => UserSignUpUsecase(serviceLocator()),
-  );
-  serviceLocator.registerFactory(
-    () => LoginUsecase(serviceLocator()),
-  );
-  serviceLocator.registerLazySingleton(
-    () => AuthBlocBloc(
-        userSignUp: serviceLocator(), loginUseCase: serviceLocator()),
-  );
+  //data source
+  serviceLocator
+    ..registerFactory<AuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(serviceLocator()),
+    )
+    //repository
+    ..registerFactory<AuthRepo>(
+      () => AuthRepositoryImpl(serviceLocator()),
+    )
+    //sign up usecase
+    ..registerFactory(
+      () => UserSignUpUsecase(serviceLocator()),
+    )
+    //login usecase
+    ..registerFactory(
+      () => LoginUsecase(serviceLocator()),
+    )
+    //current user usecase
+    ..registerFactory(() => CurrentUserUsecase(serviceLocator()))
+    //auth bloc
+    ..registerLazySingleton(
+      () => AuthBlocBloc(
+        userSignUp: serviceLocator(),
+        loginUseCase: serviceLocator(),
+        currentUserUsecase: serviceLocator(),
+      ),
+    );
 }

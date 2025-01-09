@@ -17,3 +17,5 @@ final class AuthLoginEvent extends AuthBlocEvent {
 
   AuthLoginEvent(this.email, this.password);
 }
+
+final class AuthLoggedInEvent extends AuthBlocEvent {}

@@ -14,4 +14,16 @@ class UserModle extends User {
       name: map['name'] ?? '',
     );
   }
+
+  UserModle copyWith({
+    String? id,
+    String? email,
+    String? name,
+  }) {
+    return UserModle(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      name: name ?? this.name,
+    );
+  }
 }
