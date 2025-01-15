@@ -1,4 +1,4 @@
-import 'package:blogapp/features/auth/domain/entitie/user.dart';
+import 'package:blogapp/core/common/entitie/user.dart';
 
 class UserModle extends User {
   UserModle({

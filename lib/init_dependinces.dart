@@ -1,3 +1,4 @@
+import 'package:blogapp/core/common/cubits/cubit/app_user_cubit.dart';
 import 'package:blogapp/core/secrets/app_secrets.dart';
 import 'package:blogapp/features/auth/data/data_source/auth_remote_datasource.dart';
 import 'package:blogapp/features/auth/data/repository/auth_repository_impl.dart';
@@ -6,6 +7,7 @@ import 'package:blogapp/features/auth/domain/use_case/current_user_usecase.dart'
 import 'package:blogapp/features/auth/domain/use_case/login_usecase.dart';
 import 'package:blogapp/features/auth/domain/use_case/sign_up.dart';
 import 'package:blogapp/features/auth/presentation/bloc/auth_bloc_bloc.dart';
+import 'package:blogapp/features/auth/presentation/cubit/auth_cubit_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -19,6 +21,9 @@ Future<void> initDependencies() async {
   );
 
   serviceLocator.registerLazySingleton(() => supabse.client);
+
+  //core
+  serviceLocator.registerLazySingleton(() => AppUserCubit());
 }
 
 void _initAuth() {
@@ -47,6 +52,16 @@ void _initAuth() {
         userSignUp: serviceLocator(),
         loginUseCase: serviceLocator(),
         currentUserUsecase: serviceLocator(),
+        appUserCubit: serviceLocator(),
+      ),
+    )
+    //auth cubit
+    ..registerLazySingleton(
+      () => AuthCubitCubit(
+        userSignUp: serviceLocator(),
+        loginUsecase: serviceLocator(),
+        currentUserUsecase: serviceLocator(),
+        appUserCubit: serviceLocator(),
       ),
     );
 }

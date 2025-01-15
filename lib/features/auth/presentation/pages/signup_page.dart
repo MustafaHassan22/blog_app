@@ -1,7 +1,8 @@
-import 'package:blogapp/core/common/custom_loader.dart';
+import 'package:blogapp/core/common/widgets/custom_loader.dart';
 import 'package:blogapp/core/theme/app_color.dart';
 import 'package:blogapp/core/utils/show_snakbar.dart';
 import 'package:blogapp/features/auth/presentation/bloc/auth_bloc_bloc.dart';
+import 'package:blogapp/features/auth/presentation/cubit/auth_cubit_cubit.dart';
 import 'package:blogapp/features/auth/presentation/pages/login_page.dart';
 import 'package:blogapp/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blogapp/features/auth/presentation/widgets/custom_gradient_button.dart';
@@ -86,6 +87,8 @@ class _SignupPageState extends State<SignupPage> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           print('Triggering AuthSignUpEvent');
+
+                          //user auth bloc
                           context.read<AuthBlocBloc>().add(
                                 AuthSignUpEvent(
                                   nameController.text.trim(),
@@ -93,6 +96,13 @@ class _SignupPageState extends State<SignupPage> {
                                   passworedController.text.trim(),
                                 ),
                               );
+
+                          //use cubit
+                          // context.read<AuthCubitCubit>().signUp(
+                          //       name: nameController.text.trim(),
+                          //       email: emailController.text.trim(),
+                          //       password: passworedController.text.trim(),
+                          //     );
                         }
                       },
                     ),
