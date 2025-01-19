@@ -1,7 +1,6 @@
 import 'package:blogapp/core/common/cubits/cubit/app_user_cubit.dart';
 import 'package:blogapp/core/theme/theme.dart';
 import 'package:blogapp/features/auth/presentation/bloc/auth_bloc_bloc.dart';
-import 'package:blogapp/features/auth/presentation/cubit/auth_cubit_cubit.dart';
 import 'package:blogapp/features/auth/presentation/pages/login_page.dart';
 import 'package:blogapp/features/blog/presentation/pages/blog_page.dart';
 import 'package:blogapp/init_dependinces.dart';
