@@ -4,6 +4,7 @@ class CustomBlogTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final int? maxLines;
+
   const CustomBlogTextField({
     super.key,
     required this.controller,
@@ -19,6 +20,13 @@ class CustomBlogTextField extends StatelessWidget {
         hintText: hintText,
       ),
       maxLines: maxLines,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return '$hintText is empty';
+        }
+
+        return null;
+      },
     );
   }
 }

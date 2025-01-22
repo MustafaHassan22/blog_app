@@ -8,6 +8,12 @@ import 'package:blogapp/features/auth/domain/use_case/login_usecase.dart';
 import 'package:blogapp/features/auth/domain/use_case/sign_up.dart';
 import 'package:blogapp/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:blogapp/features/auth/presentation/cubit/auth_cubit_cubit.dart';
+import 'package:blogapp/features/blog/data/data_source/blog_remote_data_source.dart';
+import 'package:blogapp/features/blog/data/repository/blog_repository_impl.dart';
+import 'package:blogapp/features/blog/domian/repository/blog_repository.dart';
+import 'package:blogapp/features/blog/domian/usecases/upload_blog_usecase.dart';
+import 'package:blogapp/features/blog/presentation/bloc/blog_bloc.dart';
+import 'package:blogapp/features/blog/presentation/cubit/blog_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -15,6 +21,7 @@ final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   _initAuth();
+  _initBlog();
   final supabse = await Supabase.initialize(
     url: AppSecrets.supabseUrl,
     anonKey: AppSecrets.supabseAnnonKey,
@@ -25,6 +32,8 @@ Future<void> initDependencies() async {
   //core
   serviceLocator.registerLazySingleton(() => AppUserCubit());
 }
+
+//register dependencies related to auth feature
 
 void _initAuth() {
   //data source
@@ -63,5 +72,30 @@ void _initAuth() {
         currentUserUsecase: serviceLocator(),
         appUserCubit: serviceLocator(),
       ),
+    );
+}
+
+//register dependencies related to blog feature
+void _initBlog() {
+  //data source
+  serviceLocator
+    ..registerFactory<BlogRemoteDataSource>(
+      () => BlogRemoteDataSourceImpl(serviceLocator()),
+      //repository
+    )
+    ..registerFactory<BlogRepository>(
+      () => BlogRepositoryImpl(serviceLocator()),
+    )
+    //usecase
+    ..registerFactory(
+      () => UploadBlogUsecase(serviceLocator()),
+    )
+    // blog bloc
+    ..registerLazySingleton(
+      () => BlogBloc(uploadBlogUsecase: serviceLocator()),
+    )
+    //blog cubit
+    ..registerLazySingleton(
+      () => BlogCubit(uploadBlogUsecase: serviceLocator()),
     );
 }

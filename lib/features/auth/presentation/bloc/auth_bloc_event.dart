@@ -8,7 +8,11 @@ final class AuthSignUpEvent extends AuthBlocEvent {
   final String email;
   final String password;
 
-  AuthSignUpEvent(this.name, this.email, this.password);
+  AuthSignUpEvent(
+    this.name,
+    this.email,
+    this.password,
+  );
 }
 
 final class AuthLoginEvent extends AuthBlocEvent {
