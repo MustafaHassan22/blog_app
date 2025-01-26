@@ -10,7 +10,7 @@ Future<File?> pickImage() async {
     }
     return null;
   } catch (e) {
-    print("Error picking image: $e");
+    // print("Error picking image: $e");
     return null;
   }
 }

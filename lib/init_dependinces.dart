@@ -11,6 +11,7 @@ import 'package:blogapp/features/auth/presentation/cubit/auth_cubit_cubit.dart';
 import 'package:blogapp/features/blog/data/data_source/blog_remote_data_source.dart';
 import 'package:blogapp/features/blog/data/repository/blog_repository_impl.dart';
 import 'package:blogapp/features/blog/domian/repository/blog_repository.dart';
+import 'package:blogapp/features/blog/domian/usecases/get_all_blogs_usecase.dart';
 import 'package:blogapp/features/blog/domian/usecases/upload_blog_usecase.dart';
 import 'package:blogapp/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:blogapp/features/blog/presentation/cubit/blog_cubit.dart';
@@ -86,16 +87,26 @@ void _initBlog() {
     ..registerFactory<BlogRepository>(
       () => BlogRepositoryImpl(serviceLocator()),
     )
-    //usecase
+    //usecase upload blog
     ..registerFactory(
       () => UploadBlogUsecase(serviceLocator()),
     )
+    //display blogs
+    ..registerFactory(
+      () => GetAllBlogsUsecase(serviceLocator()),
+    )
     // blog bloc
     ..registerLazySingleton(
-      () => BlogBloc(uploadBlogUsecase: serviceLocator()),
+      () => BlogBloc(
+        uploadBlogUsecase: serviceLocator(),
+        getAllBlogsUsecase: serviceLocator(),
+      ),
     )
     //blog cubit
     ..registerLazySingleton(
-      () => BlogCubit(uploadBlogUsecase: serviceLocator()),
+      () => BlogCubit(
+        uploadBlogUsecase: serviceLocator(),
+        getAllBlogsUsecase: serviceLocator(),
+      ),
     );
 }
