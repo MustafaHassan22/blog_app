@@ -1,6 +1,5 @@
 // Custom widget to display a single blog card
 import 'package:blogapp/core/utils/calculate_readtime.dart';
-import 'package:blogapp/core/utils/formate_date.dart';
 import 'package:blogapp/features/blog/domian/entitiy/blog_entity.dart';
 import 'package:blogapp/features/blog/presentation/pages/blog_viewer_page.dart';
 
